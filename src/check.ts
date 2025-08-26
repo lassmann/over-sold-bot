@@ -3,6 +3,13 @@ import { RSI, SMA } from 'technicalindicators';
 import TelegramBot from 'node-telegram-bot-api';
 import { config } from './config';
 
+// ANSI color codes
+const RESET = '\x1b[0m';
+const GREEN = '\x1b[32m';
+const YELLOW = '\x1b[33m';
+const BLUE = '\x1b[34m';
+const CYAN = '\x1b[36m';
+
 const bot = new TelegramBot(config.telegramBotToken);
 const symbols: string[] = ['BTC-USDT', 'ETH-USDT', 'SOL-USDT', 'SUI-USDT', 'XRP-USDT', 'BNB-USDT'];
 
@@ -37,7 +44,15 @@ async function checkBuySignal(): Promise<void> {
       const currentPrice: number = closes[closes.length - 1];
       const currentVolume: number = volumes[volumes.length - 1];
 
-      console.log(`${symbol} - Precio: $${currentPrice.toFixed(2)} - RSI (4h): ${lastRsi.toFixed(2)} - SMA(50): ${lastSma.toFixed(2)} - Volumen: ${currentVolume.toFixed(2)} - Avg Vol(20): ${lastAvgVolume.toFixed(2)}`);
+      // Format as a table with colors
+      console.log(
+        `${CYAN}${symbol.padEnd(10)}${RESET} - ` +
+        `${GREEN}Precio: $${currentPrice.toFixed(2).padEnd(10)}${RESET} - ` +
+        `${YELLOW}RSI (4h): ${lastRsi.toFixed(2).padEnd(10)}${RESET} - ` +
+        `${BLUE}SMA(50): ${lastSma.toFixed(2).padEnd(10)}${RESET} - ` +
+        `${GREEN}Volumen: ${currentVolume.toFixed(2).padEnd(15)}${RESET} - ` +
+        `${BLUE}Avg Vol(20): ${lastAvgVolume.toFixed(2)}${RESET}`
+      );
 
       if (lastRsi < 29.5) {
         const message: string = `${symbol} is oversold on 4-hour timeframe! RSI: ${lastRsi.toFixed(2)}. Current price: $${currentPrice.toFixed(2)}`;

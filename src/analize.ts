@@ -216,7 +216,6 @@ async function analyzeSignals(): Promise<void> {
       const allSignals = [...buySignals.map(s => ({ ...s, type: 'buy' })), ...sellSignals.map(s => ({ ...s, type: 'sell' }))];
       allSignals.sort((a, b) => a.index - b.index);
 
-      
       // Simple backtest
       let position = false;
       let entryPrice = 0;

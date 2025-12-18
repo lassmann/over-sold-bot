@@ -1,8 +1,8 @@
 name: Check RSI
 on:
   schedule:
-    - cron: '*/3 * * * *'  
-  workflow_dispatch:  
+    - cron: '*/3 * * * *'
+  workflow_dispatch:
 jobs:
   check-rsi:
     runs-on: ubuntu-latest
@@ -11,10 +11,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
-          cache: 'npm'  
-      - run: npm ci  
+          cache: 'npm'
+      - run: npm ci
       - run: npm run build
       - run: node dist/check.js
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          KVDB_BUCKET_ID: ${{ secrets.KVDB_BUCKET_ID }}

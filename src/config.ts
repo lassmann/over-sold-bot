@@ -5,6 +5,7 @@ dotenv.config();
 export const config = {
   telegramBotToken: process.env.TELEGRAM_BOT_TOKEN || '',
   telegramChatId: process.env.TELEGRAM_CHAT_ID || '',
+  kvdbBucketId: process.env.KVDB_BUCKET_ID || '',
 };
 
 if (!config.telegramBotToken || !config.telegramChatId) {

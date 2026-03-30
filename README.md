@@ -1,4 +1,4 @@
-# 📈 Stock Price Analyzer con yfinance
+# Stock Price Analyzer con yfinance
 
 Un script Python para consultar precios históricos de acciones usando la librería `yfinance`.
 
